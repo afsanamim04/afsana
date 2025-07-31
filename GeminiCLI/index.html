@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Afsana Mim - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    .info-box {
+      border: 2px solid #4a90e2;
+      padding: 25px;
+      margin-top: 20px;
+      background-color: #111;
+      box-shadow: 0 8px 20px rgb(74 144 226 / 0.3);
+      border-radius: 12px;
+    }
+    .profile-img {
+      width: 200px; /* Set a fixed width */
+      height: 200px; /* Set a fixed height to make it square */
+      border-radius: 50%; /* Make it circular */
+      object-fit: cover; /* Ensure the image covers the area without distortion */
+      object-position: right; /* Crop from the left side */
+      box-shadow: 0 6px 15px rgba(74, 144, 226, 0.5);
+      transition: transform 0.3s ease;
+    }
+    .profile-img:hover,
+    img:hover {
+      animation: shake 0.5s;
+      animation-iteration-count: infinite;
+    }
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 26px;
+      color: #fff !important;
+      letter-spacing: 1.2px;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-dark .navbar-nav .nav-link:hover,
+    .navbar-dark .navbar-nav .nav-link.active {
+      color: #4a90e2;
+      font-weight: 700;
+      text-shadow: 0 0 4px #4a90e2;
+    }
+    .card {
+      background-color: #111;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(74, 144, 226, 0.15);
+      transition: box-shadow 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 12px 30px rgba(74, 144, 226, 0.3);
+    }
+    .card-title {
+      font-weight: 700;
+      color: #4a90e2;
+    }
+    h3 {
+      color: #4a90e2;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #4a90e2;
+      padding-bottom: 6px;
+      width: fit-content;
+      margin-left: 0;
+    }
+    a {
+      color: #4a90e2;
+    }
+    a:hover {
+      color: #3b7ad6;
+    }
+    a.btn-primary {
+      background-color: #4a90e2;
+      border-color: #3b7ad6;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      border-radius: 50px;
+      padding: 0.5rem 1.8rem;
+      color: #fff;
+    }
+    a.btn-primary:hover {
+      background-color: #3b7ad6;
+      border-color: #2f68bb;
+      box-shadow: 0 6px 12px rgba(59, 122, 214, 0.6);
+    }
+    a.btn-outline-primary {
+      color: #4a90e2;
+      border-color: #4a90e2;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    a.btn-outline-primary:hover {
+      background-color: #4a90e2;
+      color: white;
+      box-shadow: 0 6px 15px rgba(74, 144, 226, 0.5);
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    ul li {
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+      color: #ccc;
+    }
+    blockquote {
+      border-left: 5px solid #4a90e2;
+      font-style: italic;
+      color: #ccc;
+    }
+    .text-end em {
+      color: #496fbf;
+      font-style: normal;
+      font-weight: 500;
+    }
+    p, h5 {
+        color: #fff;
+    }
+    .search-container {
+      position: relative;
+    }
+    .search-icon {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .search-input {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      transform: translateY(-50%);
+      width: 0;
+      transition: width 0.3s ease-in-out;
+    }
+    .search-input.active {
+      display: block;
+      width: 200px; /* Adjust width as needed */
+    }
+    .contact-form-card {
+      max-width: 400px; /* Set a maximum width */
+      padding: 20px; /* Adjust padding to control height */
+      margin: 0 auto; /* Center the card */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Afsana Mim</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="#achievement">Achievement</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skill">Skill</a></li>
+          <li class="nav-item"><a class="nav-link" href="#competitive-programming">Competitive Programming</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+        </div>
+        <div id="suggestions-container" class="position-absolute top-100 start-50 translate-middle-x" style="z-index: 1050; width: 300px;"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Info -->
+  <div class="container info-box">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h5>Afsana Akter Mim</h5>
+        <p>Student, Department of Information and Communication Technology (ICT)</p>
+        <p>Mawlana Bhashani Science and Technology University (MBSTU)</p>
+        <p>Santosh, Tangail</p>
+        <p>📧 Mail: <a href="mailto:afsanakhanommim04@gmail.com">afsanakhanommim04@gmail.com</a></p>
+        <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/afsana-akter-mim" target="_blank">Afsana Akter Mim</a></p>
+        <p>💻 GitHub: <a href="https://github.com/afsanamim04" target="_blank">afsanamim04</a></p>
+      </div>
+      <div class="col-md-4 text-center">
+        <img src="profile_pic.jpg" alt="Profile Photo" class="profile-img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- About Me -->
+  <div class="container mt-5" id="about">
+    <h3 class="mb-3">About Me</h3>
+    <div class="card p-4 shadow-sm">
+      <p><strong>Afsana Akter Mim</strong>, a final-year B.Sc. student in ICT at <strong>MBSTU</strong>.</p>
+      <p>Passionate about <strong>technology</strong>, <strong>innovation</strong>, and <strong>problem-solving</strong> with interests in <strong>data science</strong>, <strong>software development</strong>, and <strong>cybersecurity</strong>.</p>
+      <p>Committed to lifelong learning and aiming to build secure and impactful digital solutions for society.</p>
+      <p>Looking for opportunities in real-world projects and collaborative environments that drive positive change.</p>
+      <blockquote class="blockquote text-center my-4">
+        <p class="mb-0">"Innovation and perseverance are at the heart of every meaningful change."</p>
+      </blockquote>
+      <p class="text-end"><em>Thank you for visiting my site and being part of my journey!</em></p>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="container mt-5" id="education">
+    <h3 class="mb-3">📚 Education</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="card p-4 shadow-sm h-100">
+          <h5>🎓 Bachelor of Science (B.Sc.) (Hons.)</h5>
+          <p><strong>Subject:</strong> Information and Communication Technology (ICT)</p>
+          <p><strong>University:</strong> MBSTU, Santosh, Tangail</p>
+          <p><strong>CGPA:</strong> 3.85 (Ongoing)</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card p-4 shadow-sm h-100">
+          <h5>🎓 Higher Secondary Certificate (HSC)</h5>
+          <p><strong>Group:</strong> Science</p>
+          <p><strong>Institution:</strong> Ibrahim Kha College, Bhuapur, Tangail</p>
+          <p><strong>GPA:</strong> 5.00</p>
+          <p><strong>Year of Passing:</strong> 2020</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card p-4 shadow-sm h-100">
+          <h5>🎓 Secondary School Certificate (SSC)</h5>
+          <p><strong>Group:</strong> Science</p>
+          <p><strong>Institution:</strong> Tepibary High School, Bhuapur, Tangail</p>
+          <p><strong>GPA:</strong> 5.00</p>
+          <p><strong>Year of Passing:</strong> 2018</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resume -->
+  <div class="container mt-5" id="resume">
+    <h3 class="mb-3">📄 Resume</h3>
+    <div class="card p-4 shadow-sm">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p>You can view/download my resume by clicking the button below:</p>
+          <a href="resume.pdf" target="_blank" class="btn btn-primary">Download Resume (PDF)</a>
+        </div>
+        <div>
+          <img src="portfoliopic.png" alt="Portfolio Picture" class="img-fluid" style="max-width: 200px; height: auto;" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements & Projects -->
+  <div class="container mt-5" id="achievement">
+    <h3 class="mb-3">🏆 Achievements & Projects</h3>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 mb-4">
+        <div class="card p-4 shadow-sm h-100">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="card-title">🎮 Tic Tac Toe Game (C++)</h5>
+              <p>Console-based game demonstrating OOP and game logic.</p>
+              <a href="https://github.com/afsanamim04/Software-Development-Project-1" class="btn btn-outline-primary" target="_blank">View Project →</a>
+            </div>
+            <div class="col-md-4">
+              <img src="game1.png" alt="Tic Tac Toe Game" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mb-4">
+        <div class="card p-4 shadow-sm h-100">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="card-title">📝 Note Collection Application</h5>
+              <p>Mobile app for academic note management integrated with Google Sites.</p>
+              <a href="https://github.com/afsanamim04/Software-Development-Project---2/blob/main/MyApp.zip" class="btn btn-outline-primary" target="_blank">View Project →</a>
+            </div>
+            <div class="col-md-4">
+              <img src="noteapp.png" alt="Note Collection App" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mb-4">
+        <div class="card p-4 shadow-sm h-100">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="card-title">🦯 Smart Blind Stick Project</h5>
+              <p>Arduino-based obstacle detecting assistive device using ultrasonic sensors.</p>
+              <a href="https://github.com/afsanamim04/Arduino-Project" class="btn btn-outline-primary" target="_blank">View Project →</a>
+            </div>
+            <div class="col-md-4">
+              <img src="blind.png" alt="Smart Blind Stick" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mb-4">
+        <div class="card p-4 shadow-sm h-100">
+          <h5 class="card-title">💻 Competitive Programming</h5>
+          <p>Ranked <strong>Pupil</strong> on Codeforces, 900+ problems solved across Codeforces, UVa, LeetCode, GeeksforGeeks and more.</p>
+          <p>Regular participation in contests, improving algorithmic thinking and code efficiency.</p>
+          <div class="row mt-3">
+            <div class="col-md-3 col-6 mb-3">
+              <img src="cf.png" alt="Codeforces Profile" class="img-fluid">
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+              <img src="cf2.png" alt="Codeforces Profile" class="img-fluid">
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+              <img src="uva.png" alt="UVA Profile" class="img-fluid">
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+              <img src="leetcode.png" alt="LeetCode Profile" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Skill Section -->
+  <div class="container mt-5" id="skill">
+    <h3 class="mb-4">💻 Skills</h3>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card p-3 shadow-sm h-100">
+          <div class="d-flex align-items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++ Logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 15px;">
+            <h5 class="card-title mb-0">C++</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card p-3 shadow-sm h-100">
+          <div class="d-flex align-items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/C_Programming_Language.svg/695px-C_Programming_Language.svg.png" alt="C Logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 15px;">
+            <h5 class="card-title mb-0">C</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card p-3 shadow-sm h-100">
+          <div class="d-flex align-items-center">
+            <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM-flattened.png" alt="Python Logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 15px;">
+            <h5 class="card-title mb-0">Python</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card p-3 shadow-sm h-100">
+          <div class="d-flex align-items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png" alt="Java Logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 15px;">
+            <h5 class="card-title mb-0">Java</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card p-4 shadow-sm mt-4">
+      <h5 class="card-title">🛠 Tools, Software, and IDEs</h5>
+      <ul class="mb-0">
+        <li>Visual Studio Code (VS Code)</li>
+        <li>Code::Blocks</li>
+        <li>Eclipse</li>
+        <li>NetBeans</li>
+        <li>MATLAB</li>
+        <li>Android Studio</li>
+        <li>SQL</li>
+        <li>MS Office</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Competitive Programming Section -->
+  <div class="container mt-5" id="competitive-programming">
+    <h3 class="mb-4">🏆 Competitive Programming</h3>
+    <div class="card p-4 shadow-sm">
+      <ul class="list-unstyled">
+        <li class="mb-2"><img src="cf.png" alt="Codeforces Logo" style="width: 24px; height: 24px; margin-right: 10px;"><a href="https://codeforces.com/profile/MimAfsana" target="_blank">Codeforces</a></li>
+        <li class="mb-2"><img src="uva.png" alt="UVA Logo" style="width: 24px; height: 24px; margin-right: 10px;"><a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=15" target="_blank">UVA</a></li>
+        <li class="mb-2"><img src="leetcode.png" alt="LeetCode Logo" style="width: 24px; height: 24px; margin-right: 10px;"><a href="https://leetcode.com/u/mim123/" target="_blank">LeetCode</a></li>
+        <li class="mb-2"><img src="greeks.png" alt="GeeksforGeeks Logo" style="width: 24px; height: 24px; margin-right: 10px;"><a href="https://www.geeksforgeeks.org/user/afsanakhatpb4/" target="_blank">GeeksforGeeks</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="container mt-5" id="contact">
+    <h3 class="mb-4">📬 Contact Information</h3>
+    <div class="card p-4 shadow-sm mb-4">
+      <h5 class="card-title">📧 Email</h5>
+      <ul>
+        <li>Personal: <a href="mailto:afsanakhanommim04@gmail.com">afsanakhanommim04@gmail.com</a></li>
+        <li>Institutional: <a href="mailto:it21004@mbstu.ac.bd">it21004@mbstu.ac.bd</a></li>
+      </ul>
+      <h5 class="card-title mt-4">📞 Phone</h5>
+      <p>Available upon request</p>
+      <h5 class="card-title mt-4">🏠 Permanent Address</h5>
+      <p>Village: Jhonjhonia<br />Post Office: Falda<br />Upazila: Bhuapur<br />District: Tangail</p>
+      <h5 class="card-title mt-4">🏡 Present Address</h5>
+      <p><em>To be updated or provided if available</em></p>
+      <h5 class="card-title mt-4">🌐 Professional & Social Profiles</h5>
+      <ul>
+        <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/in/afsana-akter-mim" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Contact Form Section -->
+  <div class="container mt-5 mb-5 d-flex justify-content-center">
+    <div class="col-md-5">
+      <h3 class="mb-4 text-center">✉️ Send Me a Message</h3>
+      <div class="card p-4 shadow-sm contact-form-card">
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label" style="color: #fff;">Your Name</label>
+            <input type="text" class="form-control" id="name" required style="background-color: #000; color: #fff; border: 1px solid #fff;">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label" style="color: #fff;">Your Email</label>
+            <input type="email" class="form-control" id="email" required style="background-color: #000; color: #fff; border: 1px solid #fff;">
+          </div>
+          <div class="mb-3">
+            <label for="subject" class="form-label" style="color: #fff;">Subject</label>
+            <input type="text" class="form-control" id="subject" style="background-color: #000; color: #fff; border: 1px solid #fff;">
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label" style="color: #fff;">Message</label>
+            <textarea class="form-control" id="message" rows="5" required style="background-color: #000; color: #fff; border: 1px solid #fff;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const searchIcon = document.querySelector('.search-icon');
+    const searchInput = document.querySelector('.search-input');
+    const suggestionsContainer = document.getElementById('suggestions-container');
+    const sections = {
+      'Home': '#',
+      'About Me': '#about',
+      'Education': '#education',
+      'Resume': '#resume',
+      'Achievements & Projects': '#achievement',
+      'Skills': '#skill',
+      'Competitive Programming': '#competitive-programming',
+      'Contact': '#contact'
+    };
+
+    searchIcon.addEventListener('click', () => {
+      searchInput.classList.toggle('active');
+      if (searchInput.classList.contains('active')) {
+        searchInput.focus();
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      suggestionsContainer.innerHTML = '';
+
+      if (query.length > 0) {
+        const filteredSections = Object.keys(sections).filter(section => section.toLowerCase().includes(query));
+        
+        if (filteredSections.length > 0) {
+          const suggestionsList = document.createElement('div');
+          suggestionsList.className = 'list-group';
+
+          filteredSections.forEach(section => {
+            const suggestionItem = document.createElement('a');
+            suggestionItem.className = 'list-group-item list-group-item-action';
+            suggestionItem.href = sections[section];
+            suggestionItem.textContent = section;
+            suggestionsList.appendChild(suggestionItem);
+          });
+
+          suggestionsContainer.appendChild(suggestionsList);
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!suggestionsContainer.contains(e.target) && e.target !== searchInput && e.target !== searchIcon) {
+        suggestionsContainer.innerHTML = '';
+        searchInput.classList.remove('active');
+      }
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = searchInput.value.toLowerCase();
+        const firstMatch = Object.keys(sections).find(section => section.toLowerCase().includes(query));
+        if (firstMatch) {
+          window.location.href = sections[firstMatch];
+        }
+      }
+    });
+  </script>
+  <div class="container mt-5 mb-3 text-center">
+    <h3 class="mb-4">📍 My Location</h3>
+    <div class="card p-4 shadow-sm">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.9000000000004!2d89.916667!3d24.816667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37563b123456789:0x123456789abcdef!2sSantosh%2C%20Tangail!5e0!3m2!1sen!2sus!4v1678901234567!5m2!1sen!2sus"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</body>
+</html>
